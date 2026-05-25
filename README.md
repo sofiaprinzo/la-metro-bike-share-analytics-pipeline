@@ -115,3 +115,9 @@ The dashboard includes:
 - most popular station-to-station routes
 
 ![Dashboard overview](dashboard/tableau/screenshots/LA_Bike_Share_Demand_Dashboard.png)
+
+## Future Improvements
+
+- Add Metro Bike Share GBFS station status data to capture near-real-time snapshots of bike and dock availability.
+- Add a venue proximity layer for major Los Angeles event locations, transit hubs, and future LA 2028 Olympic venues to compare bike share access across the city.
+- Extend the pipeline to run on a quarterly schedule as new trip data is released, allowing demand trends to be compared over time.
