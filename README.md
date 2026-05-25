@@ -19,6 +19,8 @@ LA Metro Bike Share public trip data:
 
 https://bikeshare.metro.net/about/data/
 
+See `docs/data_sources.md` for the exact raw files used by this project.
+
 ## Planned Architecture
 
 ```text
