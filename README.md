@@ -68,6 +68,14 @@ warehouse/build_warehouse.py
 export/export_tableau_csvs.py
 ```
 
+## Data Checks
+
+After running the pipeline, validate the warehouse tables:
+
+```bash
+docker compose run --rm pipeline python tests/check_warehouse.py
+```
+
 ## Orchestration
 
 The Kestra flow in `orchestration/flows/la_bike_share_pipeline.yaml` defines the same local pipeline steps used by the Docker runner:
