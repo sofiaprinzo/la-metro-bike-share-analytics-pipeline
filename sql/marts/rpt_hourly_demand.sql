@@ -1,5 +1,4 @@
--- Reporting mart for bike share demand by date and hour.
--- This table supports dashboard analysis of usage patterns over time.
+-- Aggregated by date and hour so Tableau can show demand patterns without scanning trip-level rows.
 
 create or replace table marts.rpt_hourly_demand as
 select

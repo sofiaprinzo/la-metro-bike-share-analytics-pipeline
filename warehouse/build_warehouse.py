@@ -36,10 +36,10 @@ def run(trips_file, stations_file, database):
     database_path = Path(database)
 
     if not trips_path.exists():
-      raise FileNotFoundError(f"Trips file not found: {trips_path}")
+        raise FileNotFoundError(f"Trips file not found: {trips_path}")
 
     if not stations_path.exists():
-      raise FileNotFoundError(f"Stations file not found: {stations_path}")
+        raise FileNotFoundError(f"Stations file not found: {stations_path}")
 
     database_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -74,26 +74,23 @@ def run(trips_file, stations_file, database):
     run_sql_file(con, "sql/marts/rpt_route_popularity.sql")
 
     raw_count = con.execute("select count(*) from raw.trips").fetchone()[0]
+    stations_raw_count = con.execute("select count(*) from raw.stations").fetchone()[0]
     staging_count = con.execute("select count(*) from staging.trips").fetchone()[0]
+    dim_station_count = con.execute("select count(*) from marts.dim_stations").fetchone()[0]
     hourly_count = con.execute("select count(*) from marts.rpt_hourly_demand").fetchone()[0]
     station_count = con.execute("select count(*) from marts.rpt_station_activity").fetchone()[0]
     route_count = con.execute("select count(*) from marts.rpt_route_popularity").fetchone()[0]
-    
-    stations_raw_count = con.execute("select count(*) from raw.stations").fetchone()[0]
-    dim_station_count = con.execute("select count(*) from marts.dim_stations").fetchone()[0]
     
 
     con.close()
 
     print(f"Created raw.trips with {raw_count:,} rows")
+    print(f"Created raw.stations with {stations_raw_count:,} rows")
     print(f"Created staging.trips with {staging_count:,} rows")
+    print(f"Created marts.dim_stations with {dim_station_count:,} rows")
     print(f"Created marts.rpt_hourly_demand with {hourly_count:,} rows")
     print(f"Created marts.rpt_station_activity with {station_count:,} rows")
     print(f"Created marts.rpt_route_popularity with {route_count:,} rows")
-
-    print(f"Created raw.stations with {stations_raw_count:,} rows")
-    print(f"Created marts.dim_stations with {dim_station_count:,} rows")
-
     print(f"Wrote DuckDB database to {database_path}")
 
 

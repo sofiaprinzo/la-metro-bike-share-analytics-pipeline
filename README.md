@@ -23,7 +23,7 @@ https://bikeshare.metro.net/about/data/
 ## Planned Architecture
 
 ```text
-Raw CSV zip files
+Raw CSV files
     -> Python ingestion
     -> Parquet data lake
     -> DuckDB warehouse
@@ -31,8 +31,9 @@ Raw CSV zip files
     -> SQL mart models
     -> CSV exports
     -> Tableau dashboard
+```
 
-Tech Stack
+## Tech Stack
 - Python
 - Pandas
 - PyArrow

@@ -1,5 +1,4 @@
--- Staging model for LA Metro Bike Share trips.
--- This standardizes raw trip records and adds fields used by downstream marts.
+-- Clean base table for reporting models; keeps type casting and deduplication in one place.
 
 create or replace table staging.trips as
 select

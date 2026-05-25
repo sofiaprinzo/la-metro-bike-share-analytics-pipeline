@@ -12,3 +12,5 @@ data/warehouse/
 *.db
 
 .DS_Store
+
+exports/
