@@ -34,6 +34,8 @@ Raw CSV files
     -> Tableau dashboard
 ```
 
+See `docs/architecture.md` for a more detailed explanation of each pipeline layer.
+
 ## Tech Stack
 - Python
 - Pandas
