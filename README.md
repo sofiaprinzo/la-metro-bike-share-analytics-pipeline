@@ -40,6 +40,30 @@ Raw CSV files
 - SQL
 - Tableau Public
 
+## Docker Run
+
+The pipeline can be run in Docker after the raw Metro Bike Share files have been downloaded into `data/raw`.
+
+Build the image:
+
+```bash
+docker compose build
+```
+
+Run the full local pipeline:
+
+```bash
+docker compose run --rm pipeline ./scripts/run_pipeline.sh
+```
+
+This runs:
+
+```text
+ingestion/ingest_trips.py
+ingestion/ingest_stations.py
+warehouse/build_warehouse.py
+export/export_tableau_csvs.py
+```
 
 ## Dashboard
 
