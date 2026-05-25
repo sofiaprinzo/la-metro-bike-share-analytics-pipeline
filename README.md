@@ -2,6 +2,17 @@
 
 An end-to-end data engineering project using LA Metro Bike Share data to analyze station demand, trip patterns, and first-mile/last-mile mobility behavior in Los Angeles.
 
+## Project Highlights
+
+- Built a local batch data pipeline using public LA Metro Bike Share data
+- Ingested raw CSV files into a Parquet data lake
+- Loaded cleaned data into a DuckDB analytical warehouse
+- Created SQL staging and mart tables for hourly demand, station activity, and route popularity
+- Exported reporting tables for a Tableau Public dashboard
+- Added Docker, Kestra orchestration, and warehouse validation checks
+
+Dashboard: [LA Metro Bike Share Demand Dashboard](https://public.tableau.com/shared/2S5YQT764?:display_count=n&:origin=viz_share_link)
+
 ## Problem Statement
 
 Transportation and venue operations teams need reliable mobility data to understand how people move through a city. This project builds a pipeline that ingests LA Metro Bike Share trip data, cleans and transforms it, and produces analytics tables for dashboard reporting.
