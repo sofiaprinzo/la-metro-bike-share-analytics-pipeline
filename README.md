@@ -39,6 +39,7 @@ Raw CSV files
 - DuckDB
 - SQL
 - Tableau Public
+- Kestra
 
 ## Docker Run
 
@@ -63,6 +64,17 @@ ingestion/ingest_trips.py
 ingestion/ingest_stations.py
 warehouse/build_warehouse.py
 export/export_tableau_csvs.py
+```
+
+## Orchestration
+
+The Kestra flow in `orchestration/flows/la_bike_share_pipeline.yaml` defines the same local pipeline steps used by the Docker runner:
+
+```text
+ingest trips
+ingest stations
+build DuckDB warehouse
+export Tableau CSV files
 ```
 
 ## Dashboard
