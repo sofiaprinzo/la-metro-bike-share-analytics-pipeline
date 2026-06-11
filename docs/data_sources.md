@@ -29,6 +29,9 @@ data/lake/trips/year=2026/quarter=1/trips.parquet
 data/lake/trips/year=2026/quarter=2/trips.parquet
 ```
 
+It also writes a generated ingestion manifest at `data/manifest/trip_ingestion_manifest.json`.
+The manifest records each processed source file, the source year and quarter, cleaned row count, output path, and ingestion timestamp.
+
 ## Reproducing the Data Files
 
 Raw and generated data files are not committed to this repository, so after downloading the required raw files, run the Docker pipeline to recreate the Parquet, DuckDB, and Tableau export files:

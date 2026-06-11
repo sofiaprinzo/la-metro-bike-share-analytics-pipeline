@@ -6,6 +6,7 @@ __pycache__/
 
 data/raw/
 data/lake/
+data/manifest/
 data/warehouse/
 
 *.duckdb

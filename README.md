@@ -60,6 +60,7 @@ See `docs/architecture.md` for a more detailed explanation of each pipeline laye
 
 The pipeline can be run in Docker after the raw Metro Bike Share files have been downloaded into `data/raw`.
 Trip ingestion reads all files matching `data/raw/metro-trips-*.csv` and writes partitioned Parquet files under `data/lake/trips`.
+It also updates `data/manifest/trip_ingestion_manifest.json` with the processed source files, row counts, output paths, and ingestion timestamps.
 
 Build the image:
 
