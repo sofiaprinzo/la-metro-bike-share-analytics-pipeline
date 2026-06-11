@@ -5,7 +5,7 @@ An end-to-end data engineering project using LA Metro Bike Share data to analyze
 ## Project Highlights
 
 - Built a local batch data pipeline using public LA Metro Bike Share data
-- Ingested raw CSV files into a Parquet data lake
+- Ingested quarterly raw CSV files into a partitioned Parquet data lake
 - Loaded cleaned data into a DuckDB analytical warehouse
 - Created SQL staging and mart tables for hourly demand, station activity, and route popularity
 - Exported reporting tables for a Tableau Public dashboard
@@ -35,9 +35,9 @@ See `docs/data_sources.md` for the exact raw files used by this project.
 ## Planned Architecture
 
 ```text
-Raw CSV files
+Raw quarterly CSV files
     -> Python ingestion
-    -> Parquet data lake
+    -> Partitioned Parquet data lake
     -> DuckDB warehouse
     -> SQL staging models
     -> SQL mart models
@@ -59,6 +59,7 @@ See `docs/architecture.md` for a more detailed explanation of each pipeline laye
 ## Docker Run
 
 The pipeline can be run in Docker after the raw Metro Bike Share files have been downloaded into `data/raw`.
+Trip ingestion reads all files matching `data/raw/metro-trips-*.csv` and writes partitioned Parquet files under `data/lake/trips`.
 
 Build the image:
 

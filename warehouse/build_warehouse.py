@@ -15,9 +15,9 @@ def run_sql_file(con, sql_path):
 
 @click.command()
 @click.option(
-    "--trips-file",
-    default="data/lake/trips_2026_q1.parquet",
-    help="Path to the trips Parquet file in the local data lake",
+    "--trips-dir",
+    default="data/lake/trips",
+    help="Path to the partitioned trips Parquet dataset in the local data lake",
 )
 @click.option(
     "--stations-file",
@@ -29,14 +29,15 @@ def run_sql_file(con, sql_path):
     default="data/warehouse/bikeshare.duckdb",
     help="Path to the DuckDB warehouse database",
 )
-def run(trips_file, stations_file, database):
+def run(trips_dir, stations_file, database):
     """Create DuckDB warehouse tables from local data lake files."""
-    trips_path = Path(trips_file)
+    trips_path = Path(trips_dir)
     stations_path = Path(stations_file)
     database_path = Path(database)
+    trips_glob = str(trips_path / "**" / "*.parquet")
 
-    if not trips_path.exists():
-        raise FileNotFoundError(f"Trips file not found: {trips_path}")
+    if not list(trips_path.glob("**/*.parquet")):
+        raise FileNotFoundError(f"No trip Parquet files found under: {trips_path}")
 
     if not stations_path.exists():
         raise FileNotFoundError(f"Stations file not found: {stations_path}")
@@ -53,9 +54,9 @@ def run(trips_file, stations_file, database):
         """
         create or replace table raw.trips as
         select *
-        from read_parquet(?)
+        from read_parquet(?, hive_partitioning = true)
         """,
-        [str(trips_path)],
+        [trips_glob],
     )
 
     con.execute(
@@ -80,7 +81,6 @@ def run(trips_file, stations_file, database):
     hourly_count = con.execute("select count(*) from marts.rpt_hourly_demand").fetchone()[0]
     station_count = con.execute("select count(*) from marts.rpt_station_activity").fetchone()[0]
     route_count = con.execute("select count(*) from marts.rpt_route_popularity").fetchone()[0]
-    
 
     con.close()
 
