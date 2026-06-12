@@ -99,14 +99,19 @@ docker compose run --rm pipeline python tests/check_warehouse.py
 
 ## Orchestration
 
-The Kestra flow in `orchestration/flows/la_bike_share_pipeline.yaml` defines the same local pipeline steps used by the Docker runner:
+The Kestra flow in `orchestration/flows/la_bike_share_pipeline.yaml` defines a scheduled batch refresh that can safely run repeatedly.
+It checks the Metro Bike Share data page for missing quarterly trip files before rebuilding the local lake and warehouse.
 
 ```text
+download missing trip files
 ingest trips
 ingest stations
 build DuckDB warehouse
+run warehouse checks
 export Tableau CSV files
 ```
+
+The warehouse checks run before export so dashboard extracts are only refreshed after the warehouse passes validation.
 
 ## Dashboard
 

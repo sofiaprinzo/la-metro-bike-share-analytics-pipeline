@@ -2,10 +2,23 @@ id: la_bike_share_pipeline
 namespace: portfolio
 
 description: |
-  Orchestrates the local LA Metro Bike Share analytics pipeline.
-  The flow expects the raw CSV files to already exist in data/raw.
+  Orchestrates the local LA Metro Bike Share batch analytics pipeline.
+  The downloader is safe to run repeatedly and skips quarterly trip files
+  that already exist in data/raw.
+
+triggers:
+  - id: monthly_batch_refresh
+    type: io.kestra.plugin.core.trigger.Schedule
+    cron: "0 8 5 * *"
 
 tasks:
+  - id: download_trip_data
+    type: io.kestra.plugin.scripts.shell.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - python ingestion/download_trip_data.py
+
   - id: ingest_trips
     type: io.kestra.plugin.scripts.shell.Commands
     taskRunner:
@@ -26,6 +39,13 @@ tasks:
       type: io.kestra.plugin.core.runner.Process
     commands:
       - python warehouse/build_warehouse.py
+
+  - id: check_warehouse
+    type: io.kestra.plugin.scripts.shell.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - python tests/check_warehouse.py
 
   - id: export_tableau_csvs
     type: io.kestra.plugin.scripts.shell.Commands
