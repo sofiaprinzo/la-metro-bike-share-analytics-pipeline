@@ -20,6 +20,12 @@ data/raw/metro-bike-share-stations-2026-04-01.csv
 
 Each trip file contains one quarter of bike share trips.
 
+Missing quarterly trip files can also be downloaded with:
+
+```bash
+docker compose run --rm pipeline python ingestion/download_trip_data.py
+```
+
 The station file contains station names, IDs, regions, statuses, and coordinates. It is used to make the reporting tables human-readable instead of showing only station ID numbers.
 
 The trip ingestion step writes partitioned Parquet files under `data/lake/trips`, grouped by source year and quarter:

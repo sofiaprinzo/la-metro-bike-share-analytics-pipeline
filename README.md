@@ -68,6 +68,12 @@ Build the image:
 docker compose build
 ```
 
+Download any missing quarterly trip files from the Metro Bike Share data page:
+
+```bash
+docker compose run --rm pipeline python ingestion/download_trip_data.py
+```
+
 Run the full local pipeline:
 
 ```bash

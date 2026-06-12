@@ -2,3 +2,5 @@ pandas
 pyarrow
 duckdb
 click
+requests
+beautifulsoup4

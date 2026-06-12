@@ -17,7 +17,7 @@ dtype = {
     "end_station": "Int64",
     "end_lat": "float64",
     "end_lon": "float64",
-    "bike_id": "Int64",
+    "bike_id": "string",
     "plan_duration": "Int64",
     "trip_route_category": "string",
     "passholder_type": "string",
@@ -58,6 +58,7 @@ def clean_trip_file(trip_file, year, quarter, ingested_at):
     df = df[
         (df["start_time"].notna())
         & (df["end_time"].notna())
+        & (df["end_time"] >= df["start_time"])
         & (df["duration"] > 0)
     ].copy()
 
