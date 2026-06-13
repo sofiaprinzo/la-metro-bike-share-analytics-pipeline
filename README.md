@@ -7,7 +7,7 @@ A batch data engineering project using public LA Metro Bike Share trip data to e
 Hosted Streamlit app:
 
 ```text
-Link
+https://la-metro-bike-share-analytics.streamlit.app/
 ```
 
 The dashboard lets users explore:

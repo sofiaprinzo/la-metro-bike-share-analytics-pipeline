@@ -169,6 +169,7 @@ def get_historical_demand_filters():
         from staging.trips t
         left join marts.dim_stations s
             on t.start_station_id = s.station_id
+        where coalesce(s.region, 'Unknown Region') not in ('Free Bikes', 'Unknown Region')
         group by s.region
         union all
         select
