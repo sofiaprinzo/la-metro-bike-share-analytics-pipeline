@@ -4,3 +4,5 @@ duckdb
 click
 requests
 beautifulsoup4
+streamlit
+plotly

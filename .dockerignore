@@ -1,0 +1,16 @@
+.git/
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+data/raw/
+data/lake/
+data/manifest/
+data/warehouse/
+
+exports/
+dashboard/tableau/screenshots/
+
+.DS_Store

@@ -24,7 +24,12 @@ select
 
     trim(trip_route_category) as trip_route_category,
     trim(passholder_type) as passholder_type,
-    trim(bike_type) as bike_type
+    trim(bike_type) as bike_type,
+
+    cast(source_file as varchar) as source_file,
+    cast(source_year as integer) as source_year,
+    cast(source_quarter as integer) as source_quarter,
+    cast(ingested_at as timestamp) as ingested_at
 
 from raw.trips
 where start_time is not null

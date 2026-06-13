@@ -2,6 +2,8 @@
 
 create or replace table marts.rpt_station_activity as
 select
+    t.source_year,
+    t.source_quarter,
     t.start_station_id as station_id,
     coalesce(s.station_name, 'Unknown Station') as station_name,
     coalesce(s.region, 'Unknown Region') as region,
@@ -16,6 +18,8 @@ left join marts.dim_stations s
     on t.start_station_id = s.station_id
 where t.start_station_id is not null
 group by
+    t.source_year,
+    t.source_quarter,
     t.start_station_id,
     s.station_name,
     s.region,
@@ -23,4 +27,6 @@ group by
     s.latitude,
     s.longitude
 order by
+    t.source_year,
+    t.source_quarter,
     trip_starts desc;

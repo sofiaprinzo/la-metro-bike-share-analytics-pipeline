@@ -2,6 +2,8 @@
 
 create or replace table marts.rpt_hourly_demand as
 select
+    source_year,
+    source_quarter,
     trip_date,
     start_hour,
     case
@@ -16,9 +18,13 @@ select
     round(avg(duration_minutes), 2) as avg_duration_minutes
 from staging.trips
 group by
+    source_year,
+    source_quarter,
     trip_date,
     start_hour,
     start_hour_label
 order by
+    source_year,
+    source_quarter,
     trip_date,
     start_hour;
