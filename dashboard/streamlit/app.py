@@ -10,8 +10,15 @@ import plotly.express as px
 import streamlit as st
 
 
-DATABASE_PATH = Path("data/warehouse/bikeshare.duckdb")
-MANIFEST_PATH = Path("data/manifest/trip_ingestion_manifest.json")
+LOCAL_DATABASE_PATH = Path("data/warehouse/bikeshare.duckdb")
+DEPLOY_DATABASE_PATH = Path("dashboard/streamlit/data/bikeshare_dashboard.duckdb")
+DATABASE_PATH = (
+    DEPLOY_DATABASE_PATH if DEPLOY_DATABASE_PATH.exists() else LOCAL_DATABASE_PATH
+)
+
+LOCAL_MANIFEST_PATH = Path("data/manifest/trip_ingestion_manifest.json")
+DEPLOY_MANIFEST_PATH = Path("dashboard/streamlit/data/trip_ingestion_manifest.json")
+MANIFEST_PATH = DEPLOY_MANIFEST_PATH if DEPLOY_MANIFEST_PATH.exists() else LOCAL_MANIFEST_PATH
 REGION_COLORS = {
     "DTLA": "#0057B8",
     "Westside": "#E4572E",
@@ -125,15 +132,16 @@ def get_overview_metrics(selected_quarter):
 def get_table_counts():
     return run_query(
         """
-        select 'raw.trips' as table_name, count(*) as row_count from raw.trips
-        union all
-        select 'staging.trips', count(*) from staging.trips
-        union all
-        select 'marts.rpt_hourly_demand', count(*) from marts.rpt_hourly_demand
-        union all
-        select 'marts.rpt_station_activity', count(*) from marts.rpt_station_activity
-        union all
-        select 'marts.rpt_route_popularity', count(*) from marts.rpt_route_popularity
+        select *
+        from (
+            select 'staging.trips' as table_name, count(*) as row_count from staging.trips
+            union all
+            select 'marts.rpt_hourly_demand', count(*) from marts.rpt_hourly_demand
+            union all
+            select 'marts.rpt_station_activity', count(*) from marts.rpt_station_activity
+            union all
+            select 'marts.rpt_route_popularity', count(*) from marts.rpt_route_popularity
+        )
         order by table_name
         """
     )
@@ -167,6 +175,7 @@ def get_historical_demand_filters():
             'passholder_type',
             coalesce(passholder_type, 'Unknown')
         from staging.trips
+        where coalesce(passholder_type, 'Unknown') not in ('Testing', 'Unknown')
         group by passholder_type
         union all
         select
@@ -577,8 +586,12 @@ def show_station_activity(selected_quarter):
             "Include virtual / unknown destinations",
             value=False,
             help=(
-                "Includes operational or non-physical endpoints such as Virtual Station "
-                "and destinations with Unknown Region or invalid coordinates."
+                "Includes Virtual Station and Unknown Region trips. A Virtual Station is "
+                "not a regular bike dock. Metro may use it when staff need to check bikes "
+                "in or out during events like CicLAvia, overflow, maintenance, or bike "
+                "rebalancing. Unknown Region means the trip could not be matched to one "
+                "of Metro's normal service areas. This can happen if a bike is taken "
+                "outside the usual service area."
             ),
             key=(
                 f"include_special_destinations_"
@@ -724,22 +737,36 @@ def show_station_activity(selected_quarter):
         st.dataframe(destinations, width="stretch", hide_index=True)
         return
 
-    top_stations = filtered_stations.head(top_n)
+    top_stations = (
+        filtered_stations.sort_values("trip_starts", ascending=False)
+        .head(top_n)
+        .copy()
+    )
+    top_stations["station_label"] = top_stations["station_name"]
+    top_stations = top_stations.sort_values("trip_starts", ascending=True)
+    station_order = top_stations["station_label"].tolist()
 
     fig = px.bar(
-        top_stations.sort_values("trip_starts"),
+        top_stations,
         x="trip_starts",
-        y="station_name",
+        y="station_label",
         orientation="h",
         color="region",
         color_discrete_map=REGION_COLORS,
-        labels={"trip_starts": "Trip Starts", "station_name": "Station"},
+        labels={"trip_starts": "Trip Starts", "station_label": "Station"},
     )
     fig.update_layout(height=620, yaxis_title="")
+    fig.update_yaxes(categoryorder="array", categoryarray=station_order)
     st.plotly_chart(
         fig,
         width="stretch",
         key=f"station_rankings_{selected_quarter}_{selected_region}",
+    )
+    visible_regions = ", ".join(sorted(top_stations["region"].dropna().unique()))
+    st.caption(
+        f"The bar chart ranks the top {top_n} stations by trip starts. "
+        f"The region legend only includes regions visible in those top stations"
+        f"{': ' + visible_regions if visible_regions else '.'}"
     )
 
     map_df = filtered_stations[
@@ -872,6 +899,11 @@ require_warehouse()
 
 st.title("LA Metro Bike Share Analytics")
 st.caption("Batch analytics from Metro Bike Share quarterly trip data")
+st.info(
+    "This dashboard reflects the latest quarterly trip data loaded by the batch "
+    "pipeline. When Metro releases a new quarter, the scheduled pipeline can ingest "
+    "it and refresh these views."
+)
 
 quarters = get_quarters()
 quarter_options = ["All Quarters"] + quarters["quarter_label"].tolist()

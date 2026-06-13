@@ -1,0 +1,221 @@
+{
+  "files": [
+    {
+      "source_file": "metro-trips-2020-q2.csv",
+      "source_path": "data/raw/metro-trips-2020-q2.csv",
+      "source_year": 2020,
+      "source_quarter": 2,
+      "cleaned_rows": 54202,
+      "output_path": "data/lake/trips/year=2020/quarter=2/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:35.729948+00:00"
+    },
+    {
+      "source_file": "metro-trips-2020-q3.csv",
+      "source_path": "data/raw/metro-trips-2020-q3.csv",
+      "source_year": 2020,
+      "source_quarter": 3,
+      "cleaned_rows": 41504,
+      "output_path": "data/lake/trips/year=2020/quarter=3/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:36.074279+00:00"
+    },
+    {
+      "source_file": "metro-trips-2020-q4.csv",
+      "source_path": "data/raw/metro-trips-2020-q4.csv",
+      "source_year": 2020,
+      "source_quarter": 4,
+      "cleaned_rows": 37875,
+      "output_path": "data/lake/trips/year=2020/quarter=4/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:36.326001+00:00"
+    },
+    {
+      "source_file": "metro-trips-2021-q1.csv",
+      "source_path": "data/raw/metro-trips-2021-q1.csv",
+      "source_year": 2021,
+      "source_quarter": 1,
+      "cleaned_rows": 40858,
+      "output_path": "data/lake/trips/year=2021/quarter=1/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:36.556151+00:00"
+    },
+    {
+      "source_file": "metro-trips-2021-q2.csv",
+      "source_path": "data/raw/metro-trips-2021-q2.csv",
+      "source_year": 2021,
+      "source_quarter": 2,
+      "cleaned_rows": 59081,
+      "output_path": "data/lake/trips/year=2021/quarter=2/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:36.796523+00:00"
+    },
+    {
+      "source_file": "metro-trips-2021-q3.csv",
+      "source_path": "data/raw/metro-trips-2021-q3.csv",
+      "source_year": 2021,
+      "source_quarter": 3,
+      "cleaned_rows": 58411,
+      "output_path": "data/lake/trips/year=2021/quarter=3/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:37.142605+00:00"
+    },
+    {
+      "source_file": "metro-trips-2021-q4.csv",
+      "source_path": "data/raw/metro-trips-2021-q4.csv",
+      "source_year": 2021,
+      "source_quarter": 4,
+      "cleaned_rows": 62644,
+      "output_path": "data/lake/trips/year=2021/quarter=4/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:37.458157+00:00"
+    },
+    {
+      "source_file": "metro-trips-2022-q1.csv",
+      "source_path": "data/raw/metro-trips-2022-q1.csv",
+      "source_year": 2022,
+      "source_quarter": 1,
+      "cleaned_rows": 56107,
+      "output_path": "data/lake/trips/year=2022/quarter=1/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:37.818067+00:00"
+    },
+    {
+      "source_file": "metro-trips-2022-q2.csv",
+      "source_path": "data/raw/metro-trips-2022-q2.csv",
+      "source_year": 2022,
+      "source_quarter": 2,
+      "cleaned_rows": 68660,
+      "output_path": "data/lake/trips/year=2022/quarter=2/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:38.147924+00:00"
+    },
+    {
+      "source_file": "metro-trips-2022-q3.csv",
+      "source_path": "data/raw/metro-trips-2022-q3.csv",
+      "source_year": 2022,
+      "source_quarter": 3,
+      "cleaned_rows": 85171,
+      "output_path": "data/lake/trips/year=2022/quarter=3/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:38.537386+00:00"
+    },
+    {
+      "source_file": "metro-trips-2022-q4.csv",
+      "source_path": "data/raw/metro-trips-2022-q4.csv",
+      "source_year": 2022,
+      "source_quarter": 4,
+      "cleaned_rows": 80371,
+      "output_path": "data/lake/trips/year=2022/quarter=4/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:38.997964+00:00"
+    },
+    {
+      "source_file": "metro-trips-2023-q1.csv",
+      "source_path": "data/raw/metro-trips-2023-q1.csv",
+      "source_year": 2023,
+      "source_quarter": 1,
+      "cleaned_rows": 72229,
+      "output_path": "data/lake/trips/year=2023/quarter=1/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:39.439613+00:00"
+    },
+    {
+      "source_file": "metro-trips-2023-q2.csv",
+      "source_path": "data/raw/metro-trips-2023-q2.csv",
+      "source_year": 2023,
+      "source_quarter": 2,
+      "cleaned_rows": 109436,
+      "output_path": "data/lake/trips/year=2023/quarter=2/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:39.811030+00:00"
+    },
+    {
+      "source_file": "metro-trips-2023-q3.csv",
+      "source_path": "data/raw/metro-trips-2023-q3.csv",
+      "source_year": 2023,
+      "source_quarter": 3,
+      "cleaned_rows": 130753,
+      "output_path": "data/lake/trips/year=2023/quarter=3/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:40.345998+00:00"
+    },
+    {
+      "source_file": "metro-trips-2023-q4.csv",
+      "source_path": "data/raw/metro-trips-2023-q4.csv",
+      "source_year": 2023,
+      "source_quarter": 4,
+      "cleaned_rows": 128690,
+      "output_path": "data/lake/trips/year=2023/quarter=4/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:40.996965+00:00"
+    },
+    {
+      "source_file": "metro-trips-2024-q1.csv",
+      "source_path": "data/raw/metro-trips-2024-q1.csv",
+      "source_year": 2024,
+      "source_quarter": 1,
+      "cleaned_rows": 119849,
+      "output_path": "data/lake/trips/year=2024/quarter=1/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:41.647611+00:00"
+    },
+    {
+      "source_file": "metro-trips-2024-q2.csv",
+      "source_path": "data/raw/metro-trips-2024-q2.csv",
+      "source_year": 2024,
+      "source_quarter": 2,
+      "cleaned_rows": 143616,
+      "output_path": "data/lake/trips/year=2024/quarter=2/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:42.223611+00:00"
+    },
+    {
+      "source_file": "metro-trips-2024-q3.csv",
+      "source_path": "data/raw/metro-trips-2024-q3.csv",
+      "source_year": 2024,
+      "source_quarter": 3,
+      "cleaned_rows": 134918,
+      "output_path": "data/lake/trips/year=2024/quarter=3/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:42.920030+00:00"
+    },
+    {
+      "source_file": "metro-trips-2024-q4.csv",
+      "source_path": "data/raw/metro-trips-2024-q4.csv",
+      "source_year": 2024,
+      "source_quarter": 4,
+      "cleaned_rows": 120852,
+      "output_path": "data/lake/trips/year=2024/quarter=4/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:43.584285+00:00"
+    },
+    {
+      "source_file": "metro-trips-2025-q1.csv",
+      "source_path": "data/raw/metro-trips-2025-q1.csv",
+      "source_year": 2025,
+      "source_quarter": 1,
+      "cleaned_rows": 95916,
+      "output_path": "data/lake/trips/year=2025/quarter=1/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:44.207534+00:00"
+    },
+    {
+      "source_file": "metro-trips-2025-q2.csv",
+      "source_path": "data/raw/metro-trips-2025-q2.csv",
+      "source_year": 2025,
+      "source_quarter": 2,
+      "cleaned_rows": 123109,
+      "output_path": "data/lake/trips/year=2025/quarter=2/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:44.681797+00:00"
+    },
+    {
+      "source_file": "metro-trips-2025-q3.csv",
+      "source_path": "data/raw/metro-trips-2025-q3.csv",
+      "source_year": 2025,
+      "source_quarter": 3,
+      "cleaned_rows": 119865,
+      "output_path": "data/lake/trips/year=2025/quarter=3/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:45.268424+00:00"
+    },
+    {
+      "source_file": "metro-trips-2025-q4.csv",
+      "source_path": "data/raw/metro-trips-2025-q4.csv",
+      "source_year": 2025,
+      "source_quarter": 4,
+      "cleaned_rows": 95622,
+      "output_path": "data/lake/trips/year=2025/quarter=4/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:45.840926+00:00"
+    },
+    {
+      "source_file": "metro-trips-2026-q1.csv",
+      "source_path": "data/raw/metro-trips-2026-q1.csv",
+      "source_year": 2026,
+      "source_quarter": 1,
+      "cleaned_rows": 88932,
+      "output_path": "data/lake/trips/year=2026/quarter=1/trips.parquet",
+      "ingested_at": "2026-06-12T21:33:46.317882+00:00"
+    }
+  ],
+  "updated_at": "2026-06-12T21:33:46.776189+00:00"
+}

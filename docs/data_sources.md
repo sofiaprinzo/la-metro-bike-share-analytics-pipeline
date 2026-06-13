@@ -6,42 +6,47 @@ Source page:
 
 https://bikeshare.metro.net/about/data/
 
-## Required Raw Files
+## Trip Data
 
-Download quarterly trip files from the Metro Bike Share data page and place them in `data/raw`.
-The trip ingestion step will read any files that match `metro-trips-*.csv`.
+Metro publishes trip files by quarter.
 
-```text
-data/raw/metro-trips-2026-q1.csv
-data/raw/metro-trips-2026-q2.csv
-data/raw/metro-trips-2026-q3.csv
-data/raw/metro-bike-share-stations-2026-04-01.csv
-```
-
-Each trip file contains one quarter of bike share trips.
-
-Missing quarterly trip files can also be downloaded with:
-
-```bash
-docker compose run --rm pipeline python ingestion/download_trip_data.py
-```
-
-The station file contains station names, IDs, regions, statuses, and coordinates. It is used to make the reporting tables human-readable instead of showing only station ID numbers.
-
-The trip ingestion step writes partitioned Parquet files under `data/lake/trips`, grouped by source year and quarter:
+The downloader looks for files named like:
 
 ```text
-data/lake/trips/year=2026/quarter=1/trips.parquet
-data/lake/trips/year=2026/quarter=2/trips.parquet
+metro-trips-2026-q1.csv
+metro-trips-2026-q2.csv
 ```
 
-It also writes a generated ingestion manifest at `data/manifest/trip_ingestion_manifest.json`.
-The manifest records each processed source file, the source year and quarter, cleaned row count, output path, and ingestion timestamp.
+The trip files include fields such as trip time, start station, end station, bike ID, passholder type, bike type, and route category.
 
-## Reproducing the Data Files
+## Station Data
 
-Raw and generated data files are not committed to this repository, so after downloading the required raw files, run the Docker pipeline to recreate the Parquet, DuckDB, and Tableau export files:
+The station file adds readable station information, including:
 
-```bash
-docker compose run --rm pipeline ./scripts/run_pipeline.sh
+- station ID
+- station name
+- region
+- status
+- latitude and longitude
+
+This makes the dashboard easier to read because it can show station names and regions instead of only station ID numbers.
+
+## Generated Data
+
+Raw and generated data files are not committed to the repository.
+
+After the source files are downloaded, the pipeline creates:
+
+```text
+data/lake/trips/
+data/warehouse/bikeshare.duckdb
+data/manifest/trip_ingestion_manifest.json
 ```
+
+The Streamlit deployment uses a smaller dashboard database:
+
+```text
+dashboard/streamlit/data/bikeshare_dashboard.duckdb
+```
+
+That file is generated from the local DuckDB warehouse and contains the data needed by the dashboard.

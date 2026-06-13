@@ -1,47 +1,56 @@
 # Architecture
 
-I followed a local batch data pipeline pattern for this project:
+This project uses a local batch pipeline.
 
 ```text
-Metro Bike Share CSV files
+Metro Bike Share quarterly CSV files
         |
         v
 Python ingestion scripts
         |
         v
-Parquet files in data/lake
+Partitioned Parquet files
         |
         v
 DuckDB warehouse
         |
         v
-SQL staging and mart tables
+SQL staging and reporting tables
         |
         v
-CSV exports for Tableau
-        |
-        v
-Tableau Public dashboard
+Streamlit dashboard
 ```
 
-## Pipeline Layers
+## Raw Data
 
-### Raw Data
+Metro Bike Share trip and station files start in `data/raw`.
 
-The raw Metro Bike Share trip and station CSV files are downloaded manually and stored in `data/raw`.
+Trip files are quarterly CSV files. The station file adds station names, regions, statuses, and coordinates.
 
-### Data Lake
+## Data Lake
 
-The ingestion scripts clean the raw CSV files and write Parquet files to `data/lake`.
+The trip ingestion script cleans the raw trip files and writes Parquet files under `data/lake/trips`.
 
-### Warehouse
+Trips are partitioned by year and quarter, so new quarterly files can be added without changing the whole folder structure.
 
-DuckDB is used as the local analytical warehouse. The warehouse build script loads Parquet files into raw tables, then runs SQL models for staging and reporting.
+## Warehouse
 
-### Transformations
+DuckDB is used as the local database for analysis.
 
-SQL files in `sql/staging` and `sql/marts` create cleaned trip records, station dimensions, hourly demand metrics, station activity metrics, and route popularity metrics.
+The warehouse build script reads the Parquet files, creates raw tables, and then runs the SQL files in `sql/staging` and `sql/marts`.
 
-### Dashboard
+## Reporting Tables
 
-The reporting marts are exported to CSV files for Tableau Public. The dashboard shows demand patterns, station activity, and popular routes.
+The SQL models create tables for:
+
+- cleaned trip records
+- station details
+- hourly demand
+- station activity
+- route popularity
+
+## Dashboard
+
+The Streamlit app reads from DuckDB and shows the reporting tables in an interactive dashboard.
+
+For deployment, a smaller DuckDB file is created for the Streamlit app so the hosted version does not need the full local warehouse.
