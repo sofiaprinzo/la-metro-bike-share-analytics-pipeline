@@ -1,4 +1,4 @@
--- Station-level demand table for ranking high-usage pickup locations and mapping activity in Tableau.
+-- Counts trip starts by station for rankings, drilldowns, and the map.
 
 create or replace table marts.rpt_station_activity as
 select

@@ -1,4 +1,4 @@
--- Aggregated by date and hour so Tableau can show demand patterns without scanning trip-level rows.
+-- Groups trips by date and hour for demand charts.
 
 create or replace table marts.rpt_hourly_demand as
 select

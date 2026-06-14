@@ -1,4 +1,4 @@
--- Clean base table for reporting models; keeps type casting and deduplication in one place.
+-- Cleans trip records for the dashboard tables.
 
 create or replace table staging.trips as
 select

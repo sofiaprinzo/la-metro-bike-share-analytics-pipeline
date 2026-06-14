@@ -1,4 +1,4 @@
--- Station dimension used to translate trip station IDs into public names and regions.
+-- Adds station names, regions, statuses, and coordinates.
 
 create or replace table marts.dim_stations as
 select

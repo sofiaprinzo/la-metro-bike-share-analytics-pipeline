@@ -1,4 +1,4 @@
--- Route-level table for identifying the most common station-to-station trip patterns.
+-- Counts the most common station-to-station routes.
 
 create or replace table marts.rpt_route_popularity as
 select

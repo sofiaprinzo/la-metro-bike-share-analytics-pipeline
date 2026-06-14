@@ -13,3 +13,19 @@ services:
     volumes:
       - .:/app
     working_dir: /app
+
+  kestra:
+    build:
+      context: .
+      dockerfile: Dockerfile.kestra
+    command: server local --no-tutorials
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/workspace
+      - kestra-data:/home/kestra/.kestra
+    profiles:
+      - orchestration
+
+volumes:
+  kestra-data:

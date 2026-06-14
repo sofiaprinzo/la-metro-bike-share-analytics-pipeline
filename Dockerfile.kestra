@@ -1,0 +1,13 @@
+FROM kestra/kestra:latest
+
+USER root
+
+COPY requirements.txt /tmp/requirements.txt
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3 python3-pip \
+    && python3 -m pip install --no-cache-dir -r /tmp/requirements.txt \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+USER kestra

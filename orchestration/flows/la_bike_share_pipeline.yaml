@@ -17,39 +17,39 @@ tasks:
     taskRunner:
       type: io.kestra.plugin.core.runner.Process
     commands:
-      - python ingestion/download_trip_data.py
+      - cd /workspace && python ingestion/download_trip_data.py
 
   - id: ingest_trips
     type: io.kestra.plugin.scripts.shell.Commands
     taskRunner:
       type: io.kestra.plugin.core.runner.Process
     commands:
-      - python ingestion/ingest_trips.py
+      - cd /workspace && python ingestion/ingest_trips.py
 
   - id: ingest_stations
     type: io.kestra.plugin.scripts.shell.Commands
     taskRunner:
       type: io.kestra.plugin.core.runner.Process
     commands:
-      - python ingestion/ingest_stations.py
+      - cd /workspace && python ingestion/ingest_stations.py
 
   - id: build_warehouse
     type: io.kestra.plugin.scripts.shell.Commands
     taskRunner:
       type: io.kestra.plugin.core.runner.Process
     commands:
-      - python warehouse/build_warehouse.py
+      - cd /workspace && python warehouse/build_warehouse.py
 
   - id: check_warehouse
     type: io.kestra.plugin.scripts.shell.Commands
     taskRunner:
       type: io.kestra.plugin.core.runner.Process
     commands:
-      - python tests/check_warehouse.py
+      - cd /workspace && python tests/check_warehouse.py
 
-  - id: export_tableau_csvs
+  - id: export_streamlit_database
     type: io.kestra.plugin.scripts.shell.Commands
     taskRunner:
       type: io.kestra.plugin.core.runner.Process
     commands:
-      - python export/export_tableau_csvs.py
+      - cd /workspace && python export/export_streamlit_duckdb.py

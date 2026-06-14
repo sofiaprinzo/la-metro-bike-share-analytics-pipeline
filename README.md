@@ -77,3 +77,25 @@ Then open:
 ```text
 http://localhost:8501
 ```
+
+## Local Kestra Schedule
+
+Kestra can run the batch flow locally while Docker is running:
+
+```bash
+docker compose --profile orchestration up -d kestra
+```
+
+Then open:
+
+```text
+http://localhost:8080
+```
+
+Import this flow in the Kestra UI:
+
+```text
+orchestration/flows/la_bike_share_pipeline.yaml
+```
+
+The flow downloads new quarterly trip files, rebuilds the DuckDB warehouse, runs checks, and refreshes the Streamlit dashboard database.
